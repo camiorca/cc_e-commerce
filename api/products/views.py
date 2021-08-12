@@ -146,12 +146,3 @@ class PurchaseViewSet(generics.GenericAPIView):
         order.save()
 
         return JsonResponse(status=200, data={'msg': 'Order created'})
-
-
-class AsyncTaskViewSet(generics.GenericAPIView):
-    async def get(self, request):
-        await asyncio.sleep(600)
-        x_value = random.random()
-        if x_value > 0.5:
-            async with httpx.AsyncClient() as client:
-                Order.objects.filter(user=request.user.id)
